@@ -1,0 +1,39 @@
+
+---------------------------------
+Summary
+---------------------------------
+Webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.
+
+---------------------------------
+Pros
+---------------------------------
+- Can transform all front end assets like HTML, CSS even images.
+- Gives more control over http requests.
+- Allows you to only use the bits you want from any libraries.
+- You can use it in conjunction with most template engines like Pug, handlebars (default) etc using loaders.
+- Loaders let you run preprocessors on files as they’re imported. Like Gulp/Grunt so using Webpack means we don't need to use these anymore!
+
+---------------------------------
+Notes
+---------------------------------
+- using [hash] in file names will use the build hash so will be the same in each file for that build
+- using [contenthash] will use specific file hash naming (what we want). This ensures if css is changed the js file hash stays the same and vice versa.
+- I'm unsure on the best approach for adding script and css to the site.
+    1. Currently entry point js files and css will automatically get injected into the page.
+        This is great as the hashing works nicely for for css and js files
+    2. The other approach is to affectively hardcode the script and css tags in the pug template using script(src='/js/app.js')
+        To do this with Pug we need to use HtmlWebpackPugPlugin so we can call in css and js in pug template like so:
+        link(href="bundle.css" rel="stylesheet")
+        script(type="text/javascript" src="bundle.js")
+
+TO DO:
+- I want to use this: MediaQueryPlugin
+This plugin strips out all media query css not relevant for the device being used.
+This requires you to use option 2 above. If I can get to add hashing to hardcoded js and css files in pug, I can use
+option 2 above and this plugin.
+
+- Add polyfill for promises.
+
+
+
+

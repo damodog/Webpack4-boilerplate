@@ -1,0 +1,108 @@
+$BREAK-EXTRA-LARGE: 1367px !default;
+$BREAK-MEDIUM: 1024px !default;
+$BREAK-SMALL: 767px !default;
+
+$EXTRA-LARGE: xl;
+$LARGE: lg;
+$MEDIUM: md;
+$SMALL: sm;
+
+/// It’s not great practice to define solid breakpoints up-front, preferring to modify your design when it needs it, rather than assuming you’ll want a change at `md`.
+///
+/// We define some broad breakpoints in our settings file that are picked up here for use in a simple media query mixin. Our options are:
+///
+/// * xl - extra-large
+/// * lg - large
+/// * md - medium
+/// * sm - small
+///
+/// It can be used to achieve three main responsive strategy -- top-bottom propagation (desktop-first), bottom-top propagation (mobile-first) and isolation.
+///
+/// @group helpers
+/// @access public
+/// @param {string} $strategy - strategy type.
+/// @param {string} $breakpoint - media size preset
+/// @param {string} $applied-for ["only screen"] - media type query. Could be any valid CSS query and media type
+/// @example scss - Usage
+///  @include query(isolate-in, sm) { ... }
+///  @include query(isolate-in, md) { ... }
+///  @include query(propagate-from, lg, $applied-for: "screen and print") { ... }
+///  @include query(propagate-to, md) { ... }
+
+@mixin query(
+	$strategy,
+	$breakpoint,
+	$applied-for: "only screen"
+) {
+	@if ($strategy == "propagate-from") {
+		@if ($breakpoint == $EXTRA-LARGE) {
+			@warn "Use `@inlude query(isolate-in, xl)` instead";
+			@media #{$applied-for} and (min-width: $BREAK-EXTRA-LARGE) { // from extra-large to infinity
+				@content;
+			}
+		} @else if ($breakpoint == $LARGE) {
+			@media #{$applied-for} and (min-width: $BREAK-MEDIUM + 1) { // from large start
+				@content;
+			}
+		} @else if ($breakpoint == $MEDIUM) {
+			@media #{$applied-for} and (min-width: $BREAK-SMALL + 1) { // from medium start
+				@content;
+			}
+		} @else if ($breakpoint == $SMALL) {
+			@media #{$applied-for} { // from 0 to infinity
+				@content;
+			}
+		} @else {
+			@error "Unknown '#{$breakpoint}' for query";
+		}
+	} @else if ($strategy == "propagate-to") {
+		@if ($breakpoint == $EXTRA-LARGE) {
+			@media #{$applied-for} { // from 0 to infinity
+				@content;
+			}
+		} @else if ($breakpoint == $LARGE) {
+			@media #{$applied-for} and (max-width: $BREAK-EXTRA-LARGE - 1) { // from 0 to large stop
+				@content;
+			}
+		} @else if ($breakpoint == $MEDIUM) {
+			@media #{$applied-for} and (max-width: $BREAK-MEDIUM) { // from 0 to medium stop
+				@content;
+			}
+		} @else if ($breakpoint == $SMALL) {
+			@warn "Use `@inlude query(isolate-in, sm)` instead";
+			@media #{$applied-for} and (max-width: $BREAK-SMALL) { // from 0 to small stop
+				@content;
+			}
+		} @else {
+			@error "Unknown '#{$breakpoint}' for query";
+		}
+	} @else if ($strategy == "isolate-in") {
+		@if ($breakpoint == $EXTRA-LARGE) {
+			@media #{$applied-for} and (min-width: $BREAK-EXTRA-LARGE) { // from extra-large to infinity
+				@content;
+			}
+		} @else if ($breakpoint == $LARGE) {
+			@media #{$applied-for} and (min-width: $BREAK-MEDIUM + 1) and (max-width: $BREAK-EXTRA-LARGE - 1) { // from large start to large stop
+				@content;
+			}
+		} @else if ($breakpoint == $MEDIUM) {
+			@media #{$applied-for} and (min-width: $BREAK-SMALL + 1) and (max-width: $BREAK-MEDIUM) { // from medium start to medium stop
+				@content;
+			}
+		} @else if ($breakpoint == $SMALL) {
+			@media #{$applied-for} and (max-width: $BREAK-SMALL) { // from 0 to small stop
+				@content;
+			}
+		} @else {
+			@error "Unknown '#{$breakpoint}' for query";
+		}
+	} @else {
+		@error "Unknown '#{$strategy}' for query";
+	}
+}
+
+@mixin retina {
+	@media only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and (min-resolution: 120dpi) {
+		@content;
+	}
+}

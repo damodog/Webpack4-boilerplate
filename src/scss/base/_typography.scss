@@ -1,0 +1,16 @@
+// -----------------------------------------------------------------------------
+// This file contains all typography declarations.
+// -----------------------------------------------------------------------------
+
+/**
+ * Basic typography style for copy text
+ */
+
+html {
+  font-size: 100%;
+}
+
+body {
+  color: $text-color;
+  font: normal 16px / 1.4 $text-font-stack;
+}

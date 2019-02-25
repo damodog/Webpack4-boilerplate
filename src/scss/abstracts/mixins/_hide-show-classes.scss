@@ -1,0 +1,77 @@
+@mixin package-hide-show-classes() {
+	.hide {
+		display: none !important;
+		visibility: hidden;
+	}
+
+	.show {
+		display: block !important;
+		visibility: visible;
+	}
+
+	@include query(isolate-in, sm) {
+		.hide_sm {
+			display: none !important;
+			visibility: hidden;
+		}
+
+		.show_sm {
+			display: block !important;
+			visibility: visible;
+		}
+
+		.show_sm_ib {
+			display: inline-block !important;
+			visibility: visible;
+		}
+
+		.show_sm_tc {
+			display: table-cell !important;
+			visibility: visible;
+		}
+	}
+
+	@include query(isolate-in, md) {
+		.hide_md {
+			display: none !important;
+			visibility: hidden;
+		}
+
+		.show_md {
+			display: block !important;
+			visibility: visible;
+		}
+
+		.show_md_ib {
+			display: inline-block !important;
+			visibility: visible;
+		}
+
+		.show_md_tc {
+			display: table-cell !important;
+			visibility: visible;
+		}
+	}
+
+	@include query(propagate-from, lg) {
+		.hide_lg {
+			display: none !important;
+			visibility: hidden;
+		}
+
+		.show_lg {
+			display: block !important;
+			visibility: visible;
+		}
+
+		.show_lg_ib {
+			display: inline-block !important;
+			visibility: visible;
+		}
+
+		.show_lg_tc {
+			display: table-cell !important;
+			visibility: visible;
+		}
+	}
+}

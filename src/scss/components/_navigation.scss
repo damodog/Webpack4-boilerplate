@@ -1,0 +1,148 @@
+// =============================================================================
+//  HAMBURGER MENU WITH ANIMATION
+// =============================================================================
+
+.hamburger-menu {
+  display: block;
+  cursor: pointer;
+  height: 25px;
+  position: relative;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+  width: 30px;
+
+  span {
+    background: #57595b; // colour TBC and to be set as a variable
+    display: block;
+    height: 2px;
+    left: 0;
+    opacity: 1;
+    position: absolute;
+    width: 100%;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+  }
+
+  .icon-menu__top {
+    top: 0px;
+  }
+
+  .icon-menu__mid,
+  .icon-menu__mid {
+    top: 10px;
+  }
+
+  .icon-menu__bottom {
+    top: 20px;
+  }
+}
+
+.hamburger-menu_activated .site-wrapper {
+  @include query(propagate-from, md) {
+    background: rgba(0, 0, 0, .75);
+    height: 100vh; // probably won't need this when page has content...
+  }
+}
+
+.hamburger-menu {
+  @include query(propagate-from, lg) {
+    display: none !important;
+    visibility: hidden;
+  }
+}
+
+// animate hamburger icon in mobile only
+@include query(isolate-in, sm) {
+  .hamburger-menu_activated {
+    .icon-menu__top {
+      top: 18px;
+      width: 0%;
+      left: 50%;
+    }
+
+    .icon-menu__mid-a {
+      transform: rotate(45deg);
+    }
+
+    .icon-menu__mid-b {
+      transform: rotate(-45deg);
+    }
+
+    .icon-menu__bottom {
+      top: 18px;
+      width: 0%;
+      left: 50%;
+    }
+  }
+}
+
+// hide mobile search until needed
+.header-bottom .search {
+  @include query(propagate-from, md) {
+    display: none !important;
+    visibility: hidden;
+  }
+}
+
+// =============================================================================
+//  OFF CANVAS MENU
+// =============================================================================
+
+.side-nav {
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 20px;
+  transition: transform .7s;
+
+  @include query(isolate-in, sm) {
+    width: 100%;
+    display: none;
+  }
+
+  @include query(propagate-from, md) {
+    transform: translateX(-350px);
+    width: 350px;
+  }
+
+  .hamburger-menu_activated & {
+    @include query(isolate-in, sm) {
+      top: 120px; // DO DO: top value to be added
+      display: block;
+      border-top: 1px solid grey;
+    }
+
+    @include query(propagate-from, md) {
+      transform: translateX(0);
+    }
+  }
+
+  .side-nav__close {
+    svg {
+      opacity: 0;
+      color: #fff;
+      cursor: pointer;
+      height: 20px;
+      position: absolute;
+      right: -40px;
+      width: 20px;
+
+      .hamburger-menu_activated & {
+        opacity: 1;
+        animation: fade-in 2s linear;
+      }
+    }
+  }
+}
+
+.search {
+  text-align: right;
+
+  svg {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+  }
+}

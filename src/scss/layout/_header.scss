@@ -1,0 +1,44 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the header of the site/application.
+// -----------------------------------------------------------------------------
+
+.l-header {
+  display: flex;
+
+  &__left{
+    flex: 1 1 100%;
+  }
+
+  &__middle {
+    flex: 2 1 100%;
+    text-align: center;
+  }
+
+  &__right {
+    flex: 1 1 100%;
+  }
+}
+
+.header-top {
+  margin: 0 auto;
+  // max-width: 1440px;
+  min-width: 320px;
+  overflow: visible;
+  padding: 30px 20px;
+}
+
+.header-bottom {
+  text-align: center;
+
+  .main-nav {
+    ul {
+      display: inline-block;
+
+      li {
+        display: inline;
+      }
+    }
+  }
+}
+
+

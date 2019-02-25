@@ -1,0 +1,19 @@
+doctype html
+html(lang="en", manifest=htmlWebpackPlugin.files.manifest)
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        title= htmlWebpackPlugin.options.title
+        meta(name='description', content='Some description')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+    body
+        //- site-wrapper Do we need site-wrapper?
+        div(class="site-wrapper")
+            block header
+                include header.pug
+
+            main(id="main")
+                block content
+
+            block footer
+                include footer.pug

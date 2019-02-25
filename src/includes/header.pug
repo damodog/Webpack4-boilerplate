@@ -1,0 +1,28 @@
+header(class="header")
+    div(class="header-top")
+        div(class="l-header")
+            div(class="l-header__left")
+                a(class="hamburger-menu js-header-menu" hre="#main-menu-toggle" rel="nofollow" role="button" tabindex="0" title="Toggle menu")
+                    span(class="visually-hidden") Open main menu
+                    span(class="icon-menu__top")
+                    span(class="icon-menu__mid icon-menu__mid-a")
+                    span(class="icon-menu__mid icon-menu__mid-b")
+                    span(class="icon-menu__bottom")
+
+            div(class="l-header__middle")
+                div(class="logo") Logo here
+
+            div(class="l-header__right")
+                include search.pug
+
+    div(class="header-bottom")
+        //- main horizontal nav
+        nav(class="main-nav" aria-label="Main navigation")
+            include main-nav.pug
+        //- sidenav
+        nav(class="side-nav" aria-label="Sidebar navigation")
+            div(class="side-nav__close js-sidenav-close hide_sm")
+                img(inline src="src/images/icons/close-icon.svg")
+            include search.pug
+            include side-nav.pug
+
