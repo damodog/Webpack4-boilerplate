@@ -1,9 +1,10 @@
 # Webpack boilerplate
 
 ## Summary
-Bit of a playground to try to create a boilerplate using Webpack and pug as the template engine.
+Bit of a playground to create a boilerplate using Webpack and pug as the template engine.
 Npm tasks are:
-`npm start' - Watch task for compiling sass, js (using Babel) and firing up local server
+
+`npm start` - Watch task for compiling sass, js (using Babel) and firing up local server
 `npm run build` - Build task which minifies css and js and added cache busting hash ID to file names
 
 ## Notes on creation
